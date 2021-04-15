@@ -21,7 +21,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
 # mv default rc 
-mv ~/.zshrc ~/.zshrc-old
+mv $HOME/.zshrc $HOME/.zshrc-old
 
 # create a symlink for our rc
-ln zshrc /Users/salci003/.zshrc
+ln -s `pwd`/zshrc $HOME/.zshrc
