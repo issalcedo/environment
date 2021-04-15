@@ -66,9 +66,14 @@ plugins=(
   git
   osx
   zsh-autosuggestions
+  kubectl
+  kube-ps1
+  helm
+  aws
 )
 
 source $ZSH/oh-my-zsh.sh
+PROMPT=$PROMPT'$(kube_ps1) '
 
 # User configuration
 
@@ -100,11 +105,33 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # k8s
-alias ma-local="k8s-env ma-local && kubectl get pods"
-alias ma-int="k8s-env ma-int && kubectl get pods"
-alias ma-stage="k8s-env ma-stage && kubectl get pods"
-alias ma-production="k8s-env ma-production && kubectl get pods"
-alias rescreen-northstar="k8s-env rescreen-northstar && kubectl get pods"
-alias rescreen-int="k8s-env rescreen-int && kubectl get pods"
+alias ma-local="kubectx dev-k8s.moviesanywhere.io && kubens ma-local"
+alias ma-int="kubectx dev-k8s.moviesanywhere.io && kubens ma-int"
+alias ma-stage="kubectx prod-k8s.moviesanywhere.io && kubens ma-stage"
+alias ma-production="kubectx prod-k8s.moviesanywhere.io && kubens ma-production"
+alias rescreen-northstar="k8s-env rescreen-northstar"
+alias rescreen-int="k8s-env rescreen-int"
 alias k8s-kill="pkill -9 kubectl"
 alias pods="kubectl get pods"
+alias tig-int="kubectx arn:aws:eks:us-west-2:041587709638:cluster/dev-tig-ns-eks && kubens tig-int"
+alias tig-qa="kubectx arn:aws:eks:us-west-2:041587709638:cluster/dev-tig-ns-eks && kubens tig-qa"
+alias tig-stage="kubectx arn:aws:eks:us-west-2:041587709638:cluster/prd-tig-ns-eks && kubens tig-stage"
+alias tig-production="kubectx arn:aws:eks:us-west-2:041587709638:cluster/prd-tig-ns-eks && kubens tig-production"
+alias scr-int="kubectx dev-scr-ns-eks && kubens scr-int"
+alias scr-stage="kubectx prd-scr-ns-eks && kubens scr-stage"
+alias scr-production="kubectx prd-scr-ns-eks && kubens scr-production"
+
+# docker
+alias ds="docker ps -a -q | xargs -I{} docker stop {}" 
+
+#brew
+export PATH="/usr/local/opt/helm@2/bin:$PATH"
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+export PATH="/usr/local/opt/mongodb-community@3.6/bin:$PATH"
+
+#nvm
+# export NVM_DIR=~/.nvm
+# source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
