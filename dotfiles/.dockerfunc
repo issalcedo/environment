@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DOCKER_REPO_PREFIX=izzy
+
+uuid() {
+  docker run --rm -it \
+         --name uuid \
+         ${DOCKER_REPO_PREFIX}/uuid
+}

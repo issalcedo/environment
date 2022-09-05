@@ -20,6 +20,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
+# Install nvm
+
+brew install nvm
+
 # mv default rc 
 mv $HOME/.zshrc $HOME/.zshrc-old
 
